@@ -1,0 +1,32 @@
+msg=Successfully truncated configuration file
+msg=Successfully initialized log
+msg=Successfully set up network proxy
+msg=Successfully set up network proxy
+msg=Successfully obtained server time
+msg=Successfully initialized HTTP link pool
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+2024ç-07-12 12:56:00 2024-07-12 14:34:00 2024-07-12 14:35:41
+msg=Getting the Best Price - Failed<APIError> code=-1121, msg=Invalid symbol.
+msg=Getting the Best Price - Failed<APIError> code=-1121, msg=Invalid symbol.
+klinedata len:  100
+panic: runtime error: index out of range [-1]
+
+goroutine 183 [running]:
+go_code/myselfgo/wsclient.startWsKlineDataStream.func1(0xc000136200)
+	/Users/wuxiaoyong/go/src/go_code/myselfgo/wsclient/ws.go:137 +0x82d
+github.com/adshao/go-binance/v2/futures.WsCombinedKlineServe.func1({0xc0000d4800?, 0x222c223732342e39?, 0x2e30383937303131?})
+	/Users/wuxiaoyong/go/pkg/mod/github.com/adshao/go-binance/v2@v2.5.0/futures/websocket_service.go:338 +0x27b
+github.com/adshao/go-binance/v2/futures.init.func1.1()
+	/Users/wuxiaoyong/go/pkg/mod/github.com/adshao/go-binance/v2@v2.5.0/futures/websocket.go:69 +0x122
+created by github.com/adshao/go-binance/v2/futures.init.func1 in goroutine 62
+	/Users/wuxiaoyong/go/pkg/mod/github.com/adshao/go-binance/v2@v2.5.0/futures/websocket.go:41 +0x21e

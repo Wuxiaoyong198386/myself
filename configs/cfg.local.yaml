@@ -1,0 +1,197 @@
+# 开发环境 configuration file
+
+#是否开启代理
+proxy:
+  enable: true
+  address: "http://127.0.0.1:7890"
+
+#密钥管理
+account:
+  #api_key: "VfPZ3SAbgUA6DSE5Q92EPxDmPZvZPWLISvlZCAqbmCIcc6x7HUx9KBvTvFrVRgov"
+  #secret_key: "Ccp2G1MUG35WzcRlKESDKZ46w8oDIJguhSik2mpWJFatQ21DyTD2mPCTmYzPx0jQ"
+
+  api_key: "J6skpehTeuOR2ZpOdT2MY3YoxgmGA4iqDdulFfU9uFOsdftTX7E3RfQhSgJ3pHU8"
+  secret_key: "NBRe0EiQRcEEerOfO0JuvIDFGnZeOP2RlvfXYV7eTK905xetkUy3zcVEZSAXGglA"
+
+#http_client 参数配置
+http_client:
+  common:
+    timeout: 10000 # unit: ms毫秒, 指定此http客户端发出请求的时间限制
+    max_conns_per_host: 10 # 限制每个主机的连接总数
+    max_idle_conns_per_host: 5 # 控制每个主机要保持的最大空闲（保持活动）连接
+    api: "https://api.binance.com" # http服务器的api地址
+
+binance:
+  adaptive: true # 如果值为false，它将使用文件中设置的主机的值；相反，它将根据网络延迟使用自适应主机
+  host: "api.binance.com" # host of binance
+
+notice:
+  ding_talk:
+    enable: true # enable or not
+    start_and_stop:
+      name: "start_and_stop"
+      webhook: "https://oapi.dingtalk.com/robot/send?access_token=93f03a8d7b1e31ff46b1b8a067f824159a6211605ee7793e3b9a4a91598b9abf"
+      keyword: "预警"
+    info_log1:
+      name: "info_log"
+      webhook: "https://oapi.dingtalk.com/robot/send?access_token=93f03a8d7b1e31ff46b1b8a067f824159a6211605ee7793e3b9a4a91598b9abf"
+      keyword: "合约预警"
+    info_log2:
+      name: "info_log"
+      webhook: "https://oapi.dingtalk.com/robot/send?access_token=93f03a8d7b1e31ff46b1b8a067f824159a6211605ee7793e3b9a4a91598b9abf"
+      keyword: "现货预警"
+
+return_rate: # return_rate > min && return_rate < max
+  free0: # return rate for no symbol with free charge
+    min: 1.00000 # min return rate
+    max: 1.00204 # max return rate
+  free1: # return rate for 1 symbol with free charge
+    min: 1.00000
+    max: 1.00186
+  free2: # return rate for 2 symbols with free charge
+    min: 1.00000
+    max: 1.00168
+  free3: # return rate for 3 symbols with free charge
+    min: 1.00000
+    max: 1.00150
+
+file: # files to write raw message
+  best_price: # best price logger
+    compress: false # compress or not, false means no compression
+    max_size: 5 # max size of one file, unit: MB
+    max_backups: 5 # max num of backup files
+    max_age: 7 # max time to reserve the log file, unit: day
+    level: "info" # log level
+    filename: "logs/data/best_price.txt" # filename
+  return_rate: # return rate logger
+    compress: false # compress or not, false means no compression
+    max_size: 5 # max size of one file, unit: MB
+    max_backups: 5 # max num of backup files
+    max_age: 7 # max time to reserve the log file, unit: day
+    level: "info" # log level
+    filename: "logs/data/return_rate.txt" # filename
+log:
+  detail: false # show detail log if true
+  level: "warn" # log level, only support debug, info, warn, error
+
+interval:
+  best_price_write: 88888 # unit: ms（毫秒）, 将最佳价格写入日志文件的间隔
+  price_filter_info: 10000000 # unit: s（秒）  #Incomplete functionality
+  listen_key: 1500 # unit: s, 1800 is ok  #There seems to be no limit
+  symbol_refresh: 7200 # unit: s（秒） 涨幅刷新频率
+  network_delay: 1888 # unit: ms, interval of updating network delay  #Which is fast
+  host_and_delay: 1888 # unit: ms, interval of updating host and network delay  #Decide which one to use
+  update_order_cnt: 3 # unit: s, interval of updating order count  #
+  check_1d_order_cnt: 60 # unit: s, interval of checking 1d order count  #Orders cannot be placed on the same day
+  sync_funding_account: 10 # unit: s, interval of syncing funding account info  #Synchronize funding account
+  sync_spot_account: 10 # unit: s, interval of syncing spot account info  #Synchronize spot account
+  sync_best_price: 100 # unit: ms, interval of syncing best price #use http to Synchronize the best price
+  check_exit: 10 # unit: s, interval of checking exit
+  gen_ding_talk_msg: 30 # unit: s, interval of generating ding talk message
+  send_ding_talk_msg: 3333 # unit: ms, interval of sending ding talk message
+  send_ding_talk_msg: 3333 # unit: ms, interval of sending ding talk message
+  take_up_time: 1 # unit: ms, interval of taking up time
+  ws_socket_cnt: 10 # interval of wssocket count
+
+custom:
+  give_up_some: true # if true, it will give up the group whose quantity of s1 is less than s2
+  price_go_up: true # if true, s1的价格将是1.00002的倍数
+  price_go_up_rate: 1.00002 # multiple of price increase
+  sleep_time: 288 # unit: ms, sleep time when The real price is lower than the expected price
+  sleep_time_insufficient_balance: 288 # unit: ms, sleep time in case of insufficient balance
+  check_cost_fee_cycle: 999999999 # cycle of checking cost fee
+  sell_s2_at_once: true # if true, sell s2 at once
+  transfer_exit: false # if true, it will exit in case of transfer failure
+  sell_bnb: false # if true, it will sell BNB before graceful exit
+  sleep_before_sell: 3 # unit: s, sleep time before sell, it will make sense when the value is greater than 0
+  symbol_batch: 200 # subscribe count of symbols in one ws stream
+  used_weight_1m: 5888 # stop to trade if 1m used weight is greater than the threshold, max: 1200
+  order_count_10s: 95 # stop to trade if 10s order count is greater than the threshold, max: 50
+  order_count_1d: 198888 # stop to trade if 1d order count is greater than the threshold, max: 160000
+  sleep_before_exit: 11 # unit: s, sleep time before exit, it will make sense when the value is greater than 0
+  buy_bnb: 258 # unit: ms, interval of buying bnb
+  network_delay: 8 # stop to trade if network delay is greater than the threshold, unit: ms
+  cpu_threshold: 139 # send ding talk message when cpu used percent reaches the threshold
+  wait_time_next_trade: 10 # unit: ms, wait a moment before next trading
+  subscribe_cnt: 1 # count of websocket subscribe
+  give_up_trade: 6 # unit: ms, give up the trade because of cost
+  bnb_cnt_buy: -0.05 # 如果bnb数量小于阈值，则购买bnb
+  bnb_cnt_exit: -0.005 # exit the progress if count of bnb is less than the threshold
+  trade_value: 3000 # trade value
+  pick_up_threshold: 3000 # thresold of picking up
+  loss_rate: 0.05 # loss rate
+  value_thrd: 15 # 跳过要价或出价低于阈值的交易对
+  sub_value: 13 # minimal asset value will sub the sub_value
+  min_asset_value: 15 # min asset value by default
+  expected_cost_fee: 0.00075 # expected cost fee for the current api key
+  quote_value: 84745 # the progress will exit when cummulative quote quantity reaches the value
+  s1_s2_multiple: 3 # multiple
+  s1_exit_return: 300000 #如果没有套利空间，后面排队的U数量是否超过300000，超过继续等，不超过30万，考虑清仓
+  s1_order_value: 6  #小于30万的分之一
+  change_price: 0.00 #为了方便测试快速成交，可以设置价格浮动，如果上升百分之一，就设计为0.01,如果不调整用默认0.00
+  do_up_tj3: 3 #做多：上轨价-预警价(收盘价)/预警价＞3 千三
+  do_down_tj3: 3 #做空：(预警价-下轨价)/预警价＞3 千三
+symbol:
+  symbol_count: 20 #交易对数量
+  oscillation: 0.03 # 震荡幅度
+  quote_volume_min: 50000 #最小成交量
+  probability_max: 0.7 # 相似度
+  probability_min: 0.5 # probability of trading
+  root_open: true # open root symbol
+  root_symbol: "BTCFDUSD" # root symbol
+  root_type: 1 #1：现货 2: 合约
+  root_stop_macd: true #根据root_symbol的macd判断是否止损
+  type: 2 # 1: 现货, 2: 合约
+  
+  symbol_white_list: # 交易对,BEAMXUSDT,BNXUSDT,ZROUSDT,1000BONKUSDT,1000RATSUSDT,REZUSDT,NOTUSDT,TURBOUSDT,ERFUSDT,EDUUSDT,LISTAUSDT
+    [BNBUSDT,BTCUSDT,BEAMXUSDT,HOTUSDT,ZROUSDT,1000FLOKIUSDT,HIGHUSDT,1000BONKUSDT,1000RATSUSDT,1000SHIBUSDT,NOTUSDT,TURBOUSDT,EDUUSDT,LISTAUSDT,JASMYUSDT,VETUSDT,SUSHIUSDT,DOGEUSDT,ATOMUSDT,WLDUSDT,STRKUSDT,SUPERUSDT,APTUSDT]
+  symbol_free_charge: # symbol with free charge
+    [
+      "TUSDUSDT",
+      "USDCUSDT",
+      "FDUSDUSDT",
+      "USDPUSDT",
+      "BTCFDUSD",
+      "ETHFDUSD",
+      "SOLFDUSD",
+      "DOGEFDUSD",
+      "XRPFDUSD",
+      "LINKFDUSD",
+      "BNBFDUSD",
+      "AEURUSDT",
+      "BTCAEUR",
+      "EURAEUR",
+    ]
+
+
+order:
+  enable: true # enable or not
+  default_quantity: 20 # default quantity of order
+  side: 3 # 1: buy, 2: sell 3:all
+  warehouse_mode: 2 #单仓模式  2 分仓模式
+  warehouse_cnt: [10,20] # 仓位数
+  stop_loss: 0.0005 # 最高点和最低点的价格上移(下移)万五
+  stop_profit: 0.002 # 成本价挂千二止盈
+  max_loss: 0.005 # 最大亏损率
+  max_profit: 0.005 # 最大盈利率
+  open_mb: true     #动态中轨价止盈
+  bollb: 0.8  #布林比
+  max_price: 5 #
+  market_rate: 0.95 #市场情绪值
+
+kline:
+  kine_interval: "1h"
+  kine_type: "1m" # linear or cubic
+  kine_count: 100 # count of kline
+  macd_open: true
+  macd_fast: 8
+  macd_slow: 20
+  macd_signal: 5
+
+mysql_client:
+  db: "mysql"
+  host: "127.0.0.1"
+  port: "3306"
+  user: "root"
+  password: "123456"
+  db_name: "go"
